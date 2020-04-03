@@ -1,5 +1,5 @@
 Coordinate[] coordinate;
-int MAX = 2000;
+int MAX;
 int k;
 
 void setup()
@@ -7,6 +7,7 @@ void setup()
  //size(600,600);
  fullScreen();
  frameRate(100);
+ MAX = 2000;
  k=0;
  coordinate = new Coordinate[MAX];
 }

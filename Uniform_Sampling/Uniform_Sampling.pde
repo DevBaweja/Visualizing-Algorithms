@@ -25,23 +25,26 @@ void draw()
      }
     else
   {
+    // Previous Points
     for(int i=0;i<limit;i++)
       point(coordinate[i].x,coordinate[i].y,1) ;
-    
-    coordinate[limit] = generate(coordinate,limit);
+    // New Point Generated
+    coordinate[limit] = generate(coordinate);
     point(coordinate[limit].x,coordinate[limit].y,1);
-      limit++;
-      if(limit>MAX-1)
+    limit++;
+    if(limit>MAX-1)
       noLoop();
   }
-  
 }
 
-Coordinate generate(Coordinate[] coordinate,int limit)
+Coordinate generate(Coordinate[] coordinate)
 {
+  // Generating some candidate points
   Coordinate[] temp   = new Coordinate[CAND];
+  // To store their config
   Config[] config = new Config[CAND];
-  delay(5000);
+  
+  delay(2000);
   stroke(0);
   strokeWeight(4);
   
@@ -51,7 +54,8 @@ Coordinate generate(Coordinate[] coordinate,int limit)
     strokeWeight(4);
     stroke(#a9a9a9);
     point(temp[i].x,temp[i].y,0);
-    config[i] = getClose(temp[i],coordinate,limit);
+    // It will give closest point from the candidate point
+    config[i] = getClose(temp[i],coordinate);
     strokeWeight(2);
     stroke(#d3d3d3);
     line(temp[i].x,temp[i].y,-1,coordinate[config[i].index].x,coordinate[config[i].index].y,0);
@@ -67,8 +71,9 @@ Coordinate generate(Coordinate[] coordinate,int limit)
   return temp[m.index];
 }
 
-Config getClose(Coordinate temp,Coordinate[] coordinate,int limit)
+Config getClose(Coordinate temp,Coordinate[] coordinate)
 {
+  // Calculate distance btw candidate point and all points
   float[] distance  = new float[limit];
   float x1 = temp.x;
   float y1 = temp.y;
